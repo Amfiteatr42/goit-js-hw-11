@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { refs } from './refs';
-import { createGalleryMarkup } from './markupTools';
 
 export class PixabayApi {
   #BASE_URL = 'https://pixabay.com/api/';

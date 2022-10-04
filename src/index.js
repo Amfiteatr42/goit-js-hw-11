@@ -40,7 +40,6 @@ function onSearchSubmit(e) {
 
       Notify.success(`Hooray! We found ${res.data.totalHits} images.`);
       simpleGallery = new SimpleLightbox('.gallery a');
-      pixabayApi.pageIncrement();
     })
 
     .catch(error => console.log(error));
@@ -49,7 +48,8 @@ function onSearchSubmit(e) {
 function onLoadMoreClick() {
   pixabayApi.getPhotos().then(res => {
     const totalPages = Math.ceil(res.data.totalHits / pixabayApi.perPage);
-
+    console.log(totalPages);
+    console.log(pixabayApi.page);
     if (pixabayApi.page > totalPages) {
       refs.loadMoreBtn.classList.add('is-hidden');
       Notify.warning(
