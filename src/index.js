@@ -46,6 +46,7 @@ function onSearchSubmit(e) {
 }
 
 function onLoadMoreClick() {
+  pixabayApi.pageIncrement();
   pixabayApi.getPhotos().then(res => {
     const totalPages = Math.ceil(res.data.totalHits / pixabayApi.perPage);
     console.log(totalPages);
@@ -73,5 +74,4 @@ function onLoadMoreClick() {
       behavior: 'smooth',
     });
   });
-  pixabayApi.pageIncrement();
 }
