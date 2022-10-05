@@ -3,11 +3,10 @@ import { Notify } from 'notiflix';
 import { refs } from './js/refs';
 import { clearHTML, createGalleryMarkup } from './js/markupTools';
 import SimpleLightbox from 'simplelightbox';
-
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const pixabayApi = new PixabayApi();
-let simpleGallery = '';
+let simpleGallery = null;
 
 refs.form.addEventListener('submit', onSearchSubmit);
 refs.loadMoreBtn.addEventListener('click', onLoadMoreClick);
@@ -49,14 +48,11 @@ function onLoadMoreClick() {
   pixabayApi.pageIncrement();
   pixabayApi.getPhotos().then(res => {
     const totalPages = Math.ceil(res.data.totalHits / pixabayApi.perPage);
-    console.log(totalPages);
-    console.log(pixabayApi.page);
-    if (pixabayApi.page > totalPages) {
+    if (pixabayApi.page === totalPages) {
       refs.loadMoreBtn.classList.add('is-hidden');
       Notify.warning(
         "We're sorry, but you've reached the end of search results."
       );
-      return;
     }
 
     refs.gallery.insertAdjacentHTML(
